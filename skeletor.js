@@ -59,7 +59,9 @@
     var _this = this;
     var curPath = path || null;
 
-    _.each(_.keys(required), function (req) {
+    var reqKeyArray = Object.keys(required);
+
+    reqKeyArray.forEach(function (req) {
       if (typeof required[req] == 'object') {
         _this.verifyConfig(config[req], required[req], (curPath ? curPath + "." : "") + req);
       } else {

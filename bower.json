@@ -1,0 +1,28 @@
+{
+  "name": "wakeful_example",
+  "version": "0.0.1",
+  "homepage": "https://github.com/encorelab/wakeful-example",
+  "authors": [
+    "Armin Krauss <armin.krauss@utoronto.ca>"
+  ],
+  "description": "Example of how to use Faye to send messages via websockets",
+  "main": "index.html",
+  "keywords": [
+    "faye",
+    "websockets",
+    "real-time",
+    "web"
+  ],
+  "license": "GPLv2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "faye": "~1.1.0",
+    "jquery": "~2.1.4"
+  }
+}

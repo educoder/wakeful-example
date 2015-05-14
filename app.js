@@ -14,14 +14,16 @@
   app.client = null;
 
   app.init = function() {
-    /* CONFIG */
+    /* CONFIG to read wakeful URL */
     app.loadConfig('../config.json');
     app.verifyConfig(app.config, app.requiredConfig);
 
+    // create Faye client pointing at Wakeful server
     app.client = new Faye.Client(app.config.wakeful.url);
 
     app.setupClickListeners();
 
+    // subscribe to a channel to receive messages
     app.subscribeToChannel('/foo');
   },
 
