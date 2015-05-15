@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Simple wakeful client example</title>
-    <script type="text/javascript" src="./bower_components/faye/include.min.js"></script>
-    <script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://coati.encorelab.org:7890/faye/client.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="./skeletor.js"></script>
     <script type="text/javascript" src="./app.js"></script>
 </head>
 <body>
     <div>
-        <div>
-            <input type="text">
-            <button id="submit-message">Send message</button>
-        </div>
+        <form id="messageForm">
+            <fieldset>
+                <label for="messageText">Enter a message to send</label>
+                <input id="messageText" type="text" autofocus>
+            </fieldset>
+            <button type="submit" name="messageSend" value="messageSend">Send message</button>
+        </form>
         <li id="messages">
 
         </li>

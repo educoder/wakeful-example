@@ -14,29 +14,35 @@
   app.client = null;
 
   app.init = function() {
-    /* CONFIG to read wakeful URL */
-    app.loadConfig('../config.json');
-    app.verifyConfig(app.config, app.requiredConfig);
-
     // create Faye client pointing at Wakeful server
-    app.client = new Faye.Client(app.config.wakeful.url);
+    app.client = new Faye.Client('http://coati.encorelab.org:7890/faye');
 
-    app.setupClickListeners();
+    app.setupEventHandler();
 
     // subscribe to a channel to receive messages
     app.subscribeToChannel('/foo');
   },
 
-  app.setupClickListeners = function () {
-    jQuery('#submit-message').click(function(ev) {
-      var message = jQuery('input').val();
+  app.setupEventHandler = function () {
+    jQuery( "#messageForm" ).submit(function( event ) {
+      var message = JSON.stringify({text: jQuery('#messageText').val()});
       // console.log(message);
-      app.client.publish('/foo', {text: message});
+      var publication = app.client.publish('/foo', message);
+
+      publication.then(function() {
+        console.log('Message received by server!');
+        // clear the input field
+        jQuery('#messageText').val('');
+      }, function(error) {
+        alert('There was a problem: ' + error.message);
+      });
+      event.preventDefault();
     });
   },
 
   app.subscribeToChannel = function (streamName) {
-    var subscription = app.client.subscribe(streamName, function(message) {
+    var subscription = app.client.subscribe(streamName, function(jsonMessage) {
+      var message = JSON.parse(jsonMessage);
       // handle message
       console.log(message);
       var msgList = jQuery('#messages');
